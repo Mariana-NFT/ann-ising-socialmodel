@@ -1,0 +1,114 @@
+# Introduction
+
+Social-impact assessments traditionally rely on quantitative socioeconomic and environmental variables 
+that are integrated into baseline indicators. Additionally, assessments often include qualitative information 
+gathered through interviews, focus groups and participant observation. Both, quantitative and qualitative information
+serve to monitor and evaluate how communities may respond to infrastructure, extractive, energy, or development projects. 
+
+Yet these approaches often treat stakeholder preferences as largely independent observations, despite the fact 
+that social acceptance and rejection are inherently relational phenomena shaped by trust, leadership, group affiliation, 
+information flows, and interactions among community members. 
+
+This paper explores whether predictive models can better represent these dynamics by combining deep-learning techniques 
+with an Ising-model of social interaction. 
+
+The proposed framework uses individual-level characteristics and perceptions to estimate each stakeholder’s underlying 
+propensity toward project support or rejection, while a network component captures the extent to which those attitudes may 
+be reinforced, moderated, or reversed through interactions with others. 
+
+By distinguishing individual predisposition from endogenous social alignment, the study aims to investigate whether collective support 
+or opposition can be understood not simply as the aggregation of individual preferences, but as an emergent outcome of interactions within 
+a social system. The broader objective is to assess whether such a hybrid framework can improve both the prediction and interpretation of 
+social acceptance, while also providing a basis for analysing polarization, social amplification, and possible shifts in community attitudes 
+under different project and engagement scenarios.
+
+Conventional predictive methods such as logistic regression, decision trees, random forests, and artificial neural networks are well 
+suited to identifying associations between observable characteristics and individual attitudes, but they generally assume that each observation can be 
+modelled independently once the relevant covariates are taken into account. 
+
+This assumption is restrictive in social-impact settings, where attitudes toward a project may evolve through interaction with family members, 
+neighbours, community leaders, organisations, and other influential actors. 
+
+A stakeholder who is initially favourable to a project may become more sceptical when embedded in a strongly oppositional network, while an initially 
+uncertain individual may shift toward support if trusted peers perceive the project positively. Standard machine-learning models can incorporate proxies 
+for these effects as additional features, but they do not naturally represent the reciprocal and potentially nonlinear dependence among actors. 
+
+An Ising-inspired framework offers a way to introduce this interdependence explicitly by modelling each stakeholder as a node whose state reflects 
+support or rejection and whose probability of changing state depends both on an individual field and on the weighted states of connected actors. 
+Integrating this structure with machine learning therefore provides a means of separating individual-level determinants from endogenous social influence 
+and of examining how their interaction may generate collective patterns that would be difficult to capture using predictive models alone.
+
+## The Model 
+
+The central research hypothesis is that representing relationships between stakeholders can improve predictions of changes in community attitudes relative 
+to models that treat people independently. A simulation can test the implementation and explore this hypothesis. 
+Evidence of improved prediction in real communities requires observed relationships and subsequent outcomes.
+
+This model combines Artificial Neural Networks as predictors of individual propensity toward support or rejection
+with an Ising component as the social interaction layer. It should be noted that Pratik Mullick and Parongama Sen [1] 
+suggest that the scope of Ising-based sociophysics can be expanded and improve their predictive realism by integrating binary-agent models with modern 
+machine learning techniques and large-scale social datasets. 
+
+
+
+graph TD
+    A[SOCIAL-IMPACT DATA]
+    B[Individual characteristics]
+    C[Social network]
+    E[Neural Network]
+    F["Individual field"]
+    G["Peer influence"]
+    H[ISING LAYER]
+    J[sigmoid]
+    K["P (SUPPORT | SYSTEM)"]
+    
+    A --> B
+    A --> C
+    B --> E
+    C --> G
+    E --> F
+    F --> H
+    G --> H
+    H --> J
+    J --> K
+    
+    classDef dataNode stroke:#818cf8,fill:#eef2ff
+    classDef processNode stroke:#a78bfa,fill:#f5f3ff
+    classDef networkNode stroke:#2dd4bf,fill:#f0fdfa
+    classDef outputNode stroke:#f87171,fill:#fef2f2
+    
+    class A dataNode
+    class B,C dataNode
+    class D networkNode
+    class E,F processNode
+    class G networkNode
+    class H,I,J processNode
+    class K outputNode
+
+In the peer influence, each node represents a stakeholder or synthetic agent. 
+It does not represent an attitude variable such as trust. An Ising network whose nodes are 
+variable items would answer associations between attitudes.
+
+The Artificial N
+
+
+
+
+
+# References
+
+[1] Mullick, Pratik, and Parongama Sen. “Sociophysics Models Inspired by the Ising Model.” 
+arXiv:2506.23837, arXiv, 30 June 2025. arXiv.org, https://doi.org/10.48550/arXiv.2506.23837.
+
+
+
+
+
+
+
+
+
+
+
+
+
