@@ -84,12 +84,15 @@ graph TD
     class H,I,J processNode
     class K outputNode
 ```
-
-In the peer influence, each node represents a stakeholder or synthetic agent. 
+Note: Each node in the peer influence represents a stakeholder or synthetic agent. 
 It does not represent an attitude variable such as trust. An Ising network whose nodes are 
-variable items would answer associations between attitudes.
+attitude variables would answer associations between them and not between peers [2].
 
-The Artificial N
+The Artificial Neural Network would estimate something like this: 
+
+$$
+P(Y_i = 1 \mid X_i)
+$$
 
 
 
@@ -99,6 +102,10 @@ The Artificial N
 
 [1] Mullick, Pratik, and Parongama Sen. “Sociophysics Models Inspired by the Ising Model.” 
 arXiv:2506.23837, arXiv, 30 June 2025. arXiv.org, https://doi.org/10.48550/arXiv.2506.23837.
+
+[2] Finnemann, Adam, et al. “The Theoretical and Statistical Ising Model: A Practical Guide in R.” 
+Psych, vol. 3, no. 4, Oct. 2021, pp. 593–617. DOI.org (Crossref), https://doi.org/10.3390/psych3040039.
+
 
 
 
