@@ -81,6 +81,7 @@ In this case, stakeholders are conditionally independent. However, in the real w
 A network of dependent logistic regression could be an approach as in [3]; however, we opt for the Ising layer.
 
 The stakeholders are represented as Ising spins:
+
 $$
 s_i =
 \begin{cases}
@@ -90,17 +91,47 @@ s_i =
 $$
 
 And we have a network of stakeholders Sij representing the relationship between stakeholder i and stakeholder j:
+
 $$
-s_{ij}
+S_{ij}
 $$
 
 Then the Hamiltonian for the system has the form: 
+
 $$
 H =
 -\sum_i h_i s_i
 -\sum_{i,j} J_{ij} s_i s_j
 $$
 
+The first part represents the individual propensity. How inclined is stakeholder i to support /reject the project based on a set of variables that influence her stance. 
+
+The second part is the social interaction, that is, how much stakeholder $\(j\)$'s position affects stakeholder $\(i\)$'s position. The constant $\(J_{ij}\)$ represents the interaction strength between the ith and jth stakeholder. If $\(J_{ij}>0\)$ the stakeholders tend to align whereas if $\(J_{ij}<0\)$ the stakeholders tend to diverge. 
+
+The deep learning layer would be: 
+
+$$
+h_i = \{ANN}(x_i)
+$$
+
+While the social component would be: 
+$$
+-\sum_{i,j} J_{ij} s_i s_j
+$$  
+
+The probability of support would be:
+
+$$
+P(s_i = +1 \mid s_{-i}, X_i)
+=
+\sigma\left[
+2\left(
+ANN(X_i)
++
+\sum_j J_{ij}s_j
+\right)
+\right]
+$$
 
 
 
@@ -109,7 +140,18 @@ $$
 
 
 
-# References
+
+
+
+
+
+
+
+
+
+
+
+## References
 
 [1] Mullick, Pratik, and Parongama Sen. “Sociophysics Models Inspired by the Ising Model.” 
 arXiv:2506.23837, arXiv, 30 June 2025. arXiv.org, https://doi.org/10.48550/arXiv.2506.23837.
@@ -118,6 +160,10 @@ arXiv:2506.23837, arXiv, 30 June 2025. arXiv.org, https://doi.org/10.48550/arXiv
 Psych, vol. 3, no. 4, Oct. 2021, pp. 593–617. DOI.org (Crossref), https://doi.org/10.3390/psych3040039.
 
 [3] Mukherjee, Somabha, et al. High Dimensional Logistic Regression Under Network Dependence.
+
+Osogami, Takayuki. “Boltzmann Machines and Energy-Based Models.” arXiv:1708.06008, arXiv, 18 Jan. 2019. arXiv.org, https://doi.org/10.48550/arXiv.1708.06008.
+
+Castellano, Claudio, et al. “Statistical Physics of Social Dynamics.” Reviews of Modern Physics, vol. 81, no. 2, May 2009, pp. 591–646. DOI.org (Crossref), https://doi.org/10.1103/RevModPhys.81.591.
 
 
 
