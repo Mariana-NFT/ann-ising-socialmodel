@@ -45,12 +45,11 @@ to models that treat people independently. A simulation can test the implementat
 Evidence of improved prediction in real communities requires observed relationships and subsequent outcomes.
 
 This model combines Artificial Neural Networks as predictors of individual propensity toward support or rejection
-with an Ising component as the social interaction layer. It should be noted that Pratik Mullick and Parongama Sen [1] 
-suggest that the scope of Ising-based sociophysics can be expanded and improve their predictive realism by integrating binary-agent models with modern 
-machine learning techniques and large-scale social datasets. 
+with an Ising component as the social interaction layer. It should be noted that Pratik Mullick and Parongama Sen [1] suggest that the scope of Ising-based sociophysics can be expanded and improve their predictive realism by integrating binary-agent models with modern machine learning techniques and large-scale social datasets. 
 
+The core architecture is: 
 
-
+```mermaid
 graph TD
     A[SOCIAL-IMPACT DATA]
     B[Individual characteristics]
@@ -84,6 +83,7 @@ graph TD
     class G networkNode
     class H,I,J processNode
     class K outputNode
+```
 
 In the peer influence, each node represents a stakeholder or synthetic agent. 
 It does not represent an attitude variable such as trust. An Ising network whose nodes are 
