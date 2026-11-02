@@ -121,19 +121,6 @@ $$
 
 The probability of support would be:
 
-$$
-P(s_i = +1 \mid s_{-i}, X_i)
-=
-\sigma\left[
-2\left(
-ANN(X_i)
-+
-\sum_j J_{ij}s_j
-\right)
-\right]
-$$
-
-
 
 
 
