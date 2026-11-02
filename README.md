@@ -108,24 +108,49 @@ The first part represents the individual propensity. How inclined is stakeholder
 
 The second part is the social interaction, that is, how much stakeholder $\(j\)$'s position affects stakeholder $\(i\)$'s position. The constant $\(J_{ij}\)$ represents the interaction strength between the ith and jth stakeholder. If $\(J_{ij}>0\)$ the stakeholders tend to align whereas if $\(J_{ij}<0\)$ the stakeholders tend to diverge. 
 
-The deep learning layer would be: 
+The deep learning layer would be the individual's heterogeneity: 
 
 $$
 h_i = \{ANN}(x_i)
 $$
 
-While the social component would be: 
+While the social component would be: $-\sum_{i,j} J_{ij} s_i s_j$  
+
+Now, we define a local field $z_i$ where: 
+
 $$
--\sum_{i,j} J_{ij} s_i s_j
-$$  
+z_i = \frac{\partial H(s)}{\partial s_i} = h_i +\sum_{j} J_{ij} s_j
+$$
 
-The probability of support would be:
+The stakeholder's own state $s_i$ interacts with the combined field through $H_i= -s_i z_i$
 
+In this local field, the probability of support, using a Boltzman distribution is 
 
+$$
+P(s_i) \propto e^{-\beta E_i(s_i)}
+$$
 
+and $\beta = 1/T$ where T is the temperature and we assume for now that it is equal to 1. 
 
+$$
+P(s_i = +1) \propto e^{H_i}
+$$
 
+and 
 
+$$
+P(s_i = -1) \propto e^{-H_i}
+$$
+
+The probability of stakeholder i of support (given the other stakeholders and the set of variables that influence) is: 
+
+$$
+P(s_i = +1 \mid s_{-i}, X_i) 
+=
+\frac{e^{H_i}}{e^{H_i} + e^{-H_i}}
+$$
+
+if we divide the numerator and denominator by 
 
 
 
