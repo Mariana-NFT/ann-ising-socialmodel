@@ -34,7 +34,7 @@ graph TD
     A[SOCIAL-IMPACT DATA]
     B[Individual characteristics]
     C[Social network]
-    E[Neural Network]
+    E[Machine learning]
     F["Individual field"]
     G["Peer influence"]
     H[ISING LAYER]
@@ -111,7 +111,7 @@ The second part is the social interaction, that is, how much stakeholder $\(j\)$
 The deep learning layer would be the individual's heterogeneity: 
 
 $$
-h_i = \{ANN}(x_i)
+h_i = \{f_{\theta}}(x_i)
 $$
 
 While the social component would be: $-\sum_{i,j} J_{ij} s_i s_j$  
@@ -144,23 +144,79 @@ $$
 
 The probability of stakeholder i of support (given the other stakeholders and the set of variables that influence) is: 
 
-$$
-P(s_i = +1 \mid s_{-i}, X_i) 
+```math
+P(s_i = +1 \mid s_{-i}, X_i) = \frac{e^{H_i}}{e^{H_i} + e^{-H_i}}
+```
+
+if we divide the numerator and denominator by $e^{H_i}$ we get sigmoid $\sigma(2H_i)$ and the probability of support given the other stakeholders and the variables that influence the individual stance is: 
+
+```math
+\boxed{
+P(s_i = +1 \mid s_{-i}, X_i)
 =
-\frac{e^{H_i}}{e^{H_i} + e^{-H_i}}
-$$
+\sigma\left[
+2\left(
+h_i + \sum_j J_{ij}s_j
+\right)
+\right]
+}
+```
+## Expected support 
 
-if we divide the numerator and denominator by 
+When we are trying to predict the future acceptance, we don't know the value of ${s_j}$ yet, but we can estimate the expected state of stakeholder i: 
 
+```math
+m_j = E[s_j]
+```
+The expected state is: 
 
+```math
+m_i = \tanh\left(h_i + \sum_j J_{ij}m_j\right)
+```
 
+If we iterate m(i) until it converges, we can calculate the mean of $m_i$ and use it as a proxy of collective social orientation towards a project or as a collective support index. Similarly we can calculate the partial derivative with respect to the individual stance and check how much does collective support change if individual perceptions change. 
 
+Some algebra brings us from the local field to the expected state equation. 
+The expected state is: 
 
+```math
+m_i = 2\sigma(2H_i) - 1 = \tanh(H_i)
+```
+coming from: 
+```math
+E[s_i] = (+1)p + (-1)(1-p)
+= p - 1 + p
+= 2p - 1
+= \tanh(H_i)
+```
+The expected state moves the range to (-1,1) as the Ising spins. 
 
+```math
+2\sigma(2x) - 1
+= \frac{2}{1 + e^{-2x}} - 1.
+```
 
+Give both terms the same denominator:
 
+```math
+= \frac{2 - (1 + e^{-2x})}{1 + e^{-2x}}
+= \frac{1 - e^{-2x}}{1 + e^{-2x}}.
+```
 
+Multiply numerator and denominator by $e^x$:
 
+```math
+= \frac{e^x - e^{-x}}{e^x + e^{-x}}
+= \boxed{\tanh(x)}.
+```
+Therefore, the expected state for each node is: 
+
+```math
+m_i = \tanh\left(h_i + \sum_j J_{ij}m_j\right)
+```
+We will use [2] to interact with the average state and the average number of neighbours overcoming the heavy Ising computation and building the first concept with a binary logistic regression. 
+
+For this project we will work with Latinobarometro Survey for Mexico. The survey has individual responses that allow researchers to assess whether Mexicans are more inclined toward democratic ruling vis-a-vis autocratic ruling. With the survey we will estimate the individual's component $h_i$ whilst for the social component we will construct a synthetic network as the same survey does not contain collective responses. 
 
 
 ## References
